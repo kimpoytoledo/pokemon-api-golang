@@ -3,33 +3,31 @@ package api
 import (
 	"net/http"
 	"pokemon-api-golang-v2/core/port"
+	"pokemon-api-golang-v2/util/errorhandler"
+	"pokemon-api-golang-v2/util/logger"
 
 	"github.com/gin-gonic/gin"
 )
 
 type Handler struct {
 	Usecase port.PokemonUsecase
+	log     *logger.Logger
 }
 
-func NewHandler(u port.PokemonUsecase) *Handler {
-	return &Handler{Usecase: u}
+func NewHandler(u port.PokemonUsecase, log *logger.Logger) *Handler {
+	return &Handler{
+		Usecase: u,
+		log:     log,
+	}
 }
 
 func (h *Handler) GetPokemon(c *gin.Context) {
 	name := c.Param("name")
-	if name == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Pokemon name must be provided"})
-		return
-	}
-
 	pokemon, err := h.Usecase.FetchAndCachePokemon(name)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
-		return
-	}
 
-	if pokemon == nil {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Pokemon not found"})
+	if err != nil {
+		responseError := errorhandler.HandleError(h.log, err)
+		c.JSON(responseError.Code, gin.H{"error": responseError.Message})
 		return
 	}
 
