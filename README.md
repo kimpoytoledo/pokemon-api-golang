@@ -1,109 +1,74 @@
 
-
-```markdown
-# Pokemon API - Golang
-
-An API developed in Go that retrieves Pokemon data and leverages a Redis cache for enhanced performance. The architecture is built upon the Hexagonal (or Ports and Adapters) pattern for adaptability and clear separation of concerns.
+# Pokemon API - Golang v2
 
 ## Table of Contents
-- [Overview](#overview)
-- [Architecture](#architecture)
-- [Project Layout](#project-layout)
-- [Dependencies](#dependencies)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Running the Application](#running-the-application)
-- [Features](#features)
-- [Future Work](#future-work)
 
----
+- [Overview](#overview)
+- [Architecture Overview](#architecture-overview)
+- [Key Dependencies](#key-dependencies)
+- [Usage Guide](#usage-guide)
+  - [Prerequisites](#prerequisites)
+  - [Instructions](#instructions)
+- [Project Structure](#project-structure)
+- [Advanced Features](#advanced-features)
+- [Future Enhancements](#future-enhancements)
 
 ## Overview
-This API fetches Pokemon data. It uses a Redis cache to store the data, ensuring that subsequent requests are served faster. The Hexagonal design emphasizes a distinct separation between the core application logic and external interfaces, such as APIs or databases.
 
----
+This project serves as an API written in Go that fetches Pokemon data...
 
-## Architecture
-The Hexagonal Architecture segregates the application into:
+## Architecture Overview
 
-- **Core Domain:** Central business logic and entities.
-- **Ports:** Interfaces that define expected behaviors.
-- **Adapters:** Implementations of the ports, allowing interaction with external systems.
+The application is structured based on the Hexagonal Architecture...
 
+## Key Dependencies
 
----
+- **Gin:** A lightweight web framework...
 
-## Project Layout
+## Usage Guide
+
+### Prerequisites:
+
+Before diving in, ensure Docker and Docker Compose are installed...
+
+### Instructions:
+
+1. **Clone the Repository:**
+
+   ```bash
+   git clone <repository-url>
+   ...
+
+## Project Structure
+
 ```
 pokemon-api-golang-v2/
-├── adapter/                  
+│
+├── adapter/                  # Adapters for external services
 │   ├── redis/                # Redis adapter
 │   └── pokeapi/              # PokeAPI adapter
 │
-├── api/                      # API endpoints and handlers
+├── api/                      # API-related code (endpoints, handlers)
 │
-├── cmd/                      # Main application
+├── cmd/                      # Main application entry point
 │
-├── core/                     # Core logic
+├── core/                     # Core domain logic
 │   ├── entity/               # Entity definitions
-│   └── usecase/              # Business logic
+│   └── usecase/              # Core business logic
 │
-├── util/                     # Utilities
+├── util/                     # Utilities (logging, error handling)
 │   ├── logger/
 │   └── errorhandler/
 │
-├── docker-compose.yml        
-└── Dockerfile                
+├── docker-compose.yml        # Docker Compose configuration
+└── Dockerfile                # Dockerfile for the Go application
 ```
 
----
+## Advanced Features
 
-## Dependencies
-- **Gin:** Web framework for building the API.
-- **Go Redis:** Redis client for Go.
-- **PokeAPI:** External service providing Pokemon data.
+- **Logging:** Integrated logging utilities...
 
----
+## Future Enhancements
 
-## Getting Started
-
-### Prerequisites
-Ensure you have Docker and Docker Compose installed:
-- [Docker](https://docs.docker.com/get-docker/)
-- [Docker Compose](https://docs.docker.com/compose/install/)
-
-### Running the Application
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd pokemon-api-golang-v2
-```
-2. Use Docker Compose to build and run:
-```bash
-docker-compose up --build
-```
-3. Access the API:
-```
-http://localhost:8080/pokemon/{pokemon_name}
-```
-Replace `{pokemon_name}` with the desired Pokemon's name.
-
-4. Shutdown:
-```bash
-docker-compose down
-```
-
-
-
----
-
-## Features
-- **Logging:** Provides insights into app events and errors.
-- **Error Handling:** Ensures consistent error responses.
-
----
-
-## Future Work
-- Expand API functionalities, such as listing all Pokemon or filtering by type.
-```
+- Expand the API to introduce features...
 
