@@ -2,7 +2,7 @@ Certainly! Here's the complete and organized `README.md` for your project:
 
 ---
 
-# Pokemon API - Golang v2
+# Pokemon API - Golang
 
 ## Table of Contents
 
